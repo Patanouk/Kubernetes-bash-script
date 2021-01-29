@@ -1,0 +1,2 @@
+List of prometheus metrics for kubernetes cluster
+	https://www.replex.io/blog/kubernetes-in-production-the-ultimate-guide-to-monitoring-resource-metrics
