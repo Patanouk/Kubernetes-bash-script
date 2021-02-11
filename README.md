@@ -1,4 +1,4 @@
-# Kubernetes-bash-script
+# Kubernetes Resources
 
 Just a bunch of random resources for Kubernetes
 
