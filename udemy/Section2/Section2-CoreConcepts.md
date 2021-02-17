@@ -116,3 +116,13 @@ A POD is a single instance of an application. Smallest object which can be creat
 * They can share same storage as well  
 
 `kubectl run nginx --image nginx` -> Run a pod named nginx with a single docker nginx container running
+
+## 10 - PODS with Yaml
+
+Needed fields for yaml
+* `apiVersion` : version of the kubernetes api you're trying to use
+* `kind` : kind of resource
+* `metadata` : name, labels, annotations...
+* `spec` : Different for each resource type. Check docs for the list of possible values
+
+`kubectl create -f pod-definition.yaml` -> Create the `pod` (or more generally the resources) defined in the yaml file
