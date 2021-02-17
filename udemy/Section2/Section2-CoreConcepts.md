@@ -125,4 +125,31 @@ Needed fields for yaml
 * `metadata` : name, labels, annotations...
 * `spec` : Different for each resource type. Check docs for the list of possible values
 
+See [Pod yaml file](pod-definition.yaml)
+
 `kubectl create -f pod-definition.yaml` -> Create the `pod` (or more generally the resources) defined in the yaml file
+`kubectl get pods -o wide` -> Also shows on which node the pod is running
+
+## 11 - ReplicaSets
+
+Replication Controller (old way) vs ReplicaSets (new way)
+* Responsible for bringing back up failed pods
+* Responsible for load balancing and scaling. Multiple pods can belong to the same replica set
+
+See [Replication Controller yaml file](rc-definition.yaml)  
+See [Replicaset yaml file](replicaset-definition.yaml)  
+
+Differents behavior for selector : 
+* `Replication controller` : Assumes the selector is same as the labels provided in the pod definition file
+* `Replica Set` : the selector needs to be filled manually  
+
+Why do we need labels and selectors?  
+
+The `replica set` is a process used to monitor the pods, and spin them up if necessary  
+The labels can be used as a filter so that the `replica set` know which pods to monitor  
+The `replica set` doesn't creates new pods if pods already exists. !!!Still need templates section though, so the `replicaset` knows how to create a pod if one goes down!!!  
+
+How do we scale the replica set?
+
+* Modify the yaml file and run `kubectl apply` <- Better since you can check the file in version control
+* `kubectl scale --replicas 6 -f replicaset-definition.yaml` !!!Doesn't change the file!!!
