@@ -3,11 +3,11 @@
 Just a bunch of random resources for Kubernetes
 
 * List of prometheus metrics for kubernetes cluster  
-https://www.replex.io/blog/kubernetes-in-production-the-ultimate-guide-to-monitoring-resource-metrics
+  https://www.replex.io/blog/kubernetes-in-production-the-ultimate-guide-to-monitoring-resource-metrics
 
 
 * StackOverflow question about unit of 'container_cpu_usage_seconds_total' prometheus metric  
-https://stackoverflow.com/questions/48872042/how-do-i-get-a-pods-millicore-cpu-usage-with-prometheus-in-kubernetes
+  https://stackoverflow.com/questions/48872042/how-do-i-get-a-pods-millicore-cpu-usage-with-prometheus-in-kubernetes
 
 
 * Quality of services for pods  
