@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapp-deployment
+    meta: deployment-metadata
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: myapp-deployment
+      labels:
+        app: myapp-deployment
+        type: front-end
+        meta: spec-template-metadata
+    spec:
+      containers:
+        - name: myapp-deployment
+          image: nginx
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      type: front-end

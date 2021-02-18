@@ -153,3 +153,15 @@ How do we scale the replica set?
 
 * Modify the yaml file and run `kubectl apply` <- Better since you can check the file in version control
 * `kubectl scale --replicas 6 -f replicaset-definition.yaml` !!!Doesn't change the file!!!
+
+## 12 - Deployments
+
+Deployment = POD + replicaset
+
+* Can have rolling update, rolling restart etc...
+
+See [Deployment yaml file](deployment-definition.yml)
+
+`kubectl get pods` -> See it created pods
+`kubectl get replicaset` -> See it created replicaset
+`kubectl get deployment` -> See it created a deployment
