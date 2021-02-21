@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  selector:
+    app: myapp-deployment
+    type: front-end
+  ports:
+    - targetPort: 80
+      port: 8080
+      nodePort: 30008
+  type: NodePort

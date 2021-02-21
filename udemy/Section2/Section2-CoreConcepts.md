@@ -199,3 +199,33 @@ Switch namespace permanently
 
 Limit namespace resource
 * Create a resource quota yaml file
+
+## 14 - Services
+
+Service types
+* `NodePort` : Makes internal pod accessible via a port on the worker node -> Service is accessible outside
+* `ClusterIp` : The service creates a virtual IP inside the cluster to enable communication between services
+* `LoadBalancer` : Creates a loadbalancer as provided by the CloudProvider
+
+### NodePort
+It maps a port on the node to a port on the Pod  
+The service is in fact like a virtual server inside the node  
+It has a virtual IP address
+
+* `target port` : port on the pod
+  * If not specified in yaml file, assumed to be the same as port
+* `port` : port on the service
+* `ClusterIp` : virtual ip adress of the Service
+* `NodePort` : Port on the node, exposed to the outside
+  * Can only be in the range 30000-32767
+  * If not provided, free port is automatically allocated
+  
+Services can be created with a yaml file  
+
+The `service` automatically select all the pods matching the selectors and forward the requests to the matching pods
+The `NodePort` uses a random algorithm to balance the requests  
+The `NodePort` is hence acting a built-in loadbalancer  
+
+What happens if pods are distributed on multiple nodes?
+Kubernetes automatically starts the service on all nodes  -> You can access the service with any ip in the cluster and the node port
+The `NodePort` can be pinged on all the nodes having the pods matching the selector  
