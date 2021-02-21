@@ -165,3 +165,37 @@ See [Deployment yaml file](deployment-definition.yml)
 `kubectl get pods` -> See it created pods
 `kubectl get replicaset` -> See it created replicaset
 `kubectl get deployment` -> See it created a deployment
+
+## 13 - Namespaces
+
+Object used to isolate object from each others  
+Pods, replicaset, Services etc... can be in separate namespaces
+
+Examples
+* `Default` : Default namespace used when creating object
+* `kube-system` : Used by kubernetes to create kubernetes specific objects. Separate from default, so you don't mess around with it
+* `kube-public` : Where resources available to everyone are??  
+
+You can have resource limits per namespace  
+
+DNS  
+* Same namespace : ping `db-service`
+* Different namespace : ping `db-service.namespace.svc.cluster.loca`
+  * `db-service` : service name
+  * `namespace` : namespace name
+  * `svc` : service
+  * `cluster.local` : domain
+  
+Commands : 
+* `kubectl gets pods --namespace=kube-system`
+* `kubectl get pods --all-namespaces`
+* `kubectl apply -f pod.yaml --namespace=dev`
+  * Can add `namespace: dev` under the pod metadata section in yaml
+  
+You can create a namespace with a yaml file
+
+Switch namespace permanently
+* `kubectl config --set-context $(kubectl config current-context) --namespace dev`
+
+Limit namespace resource
+* Create a resource quota yaml file
