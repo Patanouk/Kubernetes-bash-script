@@ -192,7 +192,8 @@ Commands :
 * `kubectl apply -f pod.yaml --namespace=dev`
   * Can add `namespace: dev` under the pod metadata section in yaml
   
-You can create a namespace with a yaml file
+You can create a namespace with a yaml file  
+See [namespace yaml file](namespace-definition.yaml)
 
 Switch namespace permanently
 * `kubectl config --set-context $(kubectl config current-context) --namespace dev`
@@ -212,15 +213,16 @@ It maps a port on the node to a port on the Pod
 The service is in fact like a virtual server inside the node  
 It has a virtual IP address
 
-* `target port` : port on the pod
+* `target port` : port exposed on the pod
   * If not specified in yaml file, assumed to be the same as port
-* `port` : port on the service
-* `ClusterIp` : virtual ip adress of the Service
+* `port` : port exposed on the service
+* `ClusterIp` : virtual ip address of the Service
 * `NodePort` : Port on the node, exposed to the outside
   * Can only be in the range 30000-32767
   * If not provided, free port is automatically allocated
   
 Services can be created with a yaml file  
+See [NodePort yaml file](service-nodeport-definition.yaml)
 
 The `service` automatically select all the pods matching the selectors and forward the requests to the matching pods
 The `NodePort` uses a random algorithm to balance the requests  
@@ -229,3 +231,16 @@ The `NodePort` is hence acting a built-in loadbalancer
 What happens if pods are distributed on multiple nodes?
 Kubernetes automatically starts the service on all nodes  -> You can access the service with any ip in the cluster and the node port
 The `NodePort` can be pinged on all the nodes having the pods matching the selector  
+
+
+### ClusterIp
+
+This kind of service is handling communication between different kind of pods
+Pods go down all the time, so cannot rely on Ip adresses. Instead, `ClusterIp` handles the communication
+Not open to the outside
+
+Services can be created with a yaml file  
+See [ClusterIp yaml file](service-clusterip-definition.yaml)
+
+* `target port` : port exposed on the pod
+* `port` : port exposed on the service
