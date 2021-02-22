@@ -244,3 +244,15 @@ See [ClusterIp yaml file](service-clusterip-definition.yaml)
 
 * `target port` : port exposed on the pod
 * `port` : port exposed on the service
+
+### LoadBalancer
+
+NodePort -> Exposes the same port on all of the nodes  
+Which Ip do you use to access the service if distributed on multiple nodes? 
+
+Load balancer gives you a single point of entry to all the pods on all the nodes  
+Can be managed by cloud providers  
+
+If done on a local environment, the LoadBalancer just acts a NodePort
+
+TODO : Check what endpoint is for a service
