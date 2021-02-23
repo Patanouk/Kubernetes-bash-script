@@ -256,3 +256,12 @@ Can be managed by cloud providers
 If done on a local environment, the LoadBalancer just acts a NodePort
 
 TODO : Check what endpoint is for a service
+
+## 15 - Imperative vs Declarative
+
+* `Imperative` : steps by steps instructions
+  * `kubectl create`
+  * `kubectl edit deployment`
+  * `kubectl scale deployment`
+* `Declarative` : Only specifying the final state we want to go to
+  * `kubectl apply`
