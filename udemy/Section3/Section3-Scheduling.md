@@ -148,3 +148,49 @@ See [daemon-set yaml](deamonset-definition.yaml)
 
 ####Under the hood
 Uses `NodeAffinity` to schedule a pod per node
+
+## 8 - Static Pods
+
+What happens if we have a single node without a Kubernetes master (e.g. single kubelet on a node)?
+
+You can configure the kubelet to read the pod definition files from a specific directory on the server  
+The kubelet periodically checks the directory, reads the file and creates the nodes  
+If the application crashes, the kubelet recreates the pod. Same if file is changed  
+If file removed, kubelet deletes pod  
+
+!!!Can only create pods, no ReplicaSet, Deployments...!!!  
+The kubelet only works on a pod level
+
+####Options
+* `--pod-manifest-path`=/etc/Kubernetes/manifests
+* Via config file
+  * `--config=kubeconfig.yaml`
+  * Can then check inside `kubeconfig.yaml` for `staticPodPath` option
+    
+####Seeing the containers
+~~kubectl~~ -> Not supported, as it normally does api calls to the `kubeapi-server`
+`docker ps` -> Will list the containers running  
+
+#### How to create both?
+
+You can create `Pods` both ways out of the box
+* Via the kubectl -> http request to kubeapi-server -> http request to kubelet  
+* Via the static pods method defined above  
+
+The kubeapi-server is also aware of the static pods (via directory) created by the kubelet  
+However, it's read-only, e.g. the kubeapi-server cannot modify the static pods
+
+####How to recognize static pods
+They have the name of the node as suffix of the pod name 
+Example: etc-controlplane
+* `etcd` -> pod name
+* `controlplane` -> node name
+
+####Why do we neeed this?
+
+Useful to setup kubernetes cluster  
+1. Install kubelet on all the master nodes
+2. Pass all the yaml files for the controlplane components to the kubelet
+3. The kubelet download and install the images. That way, no need to worry about setting up things manually, downloading etc...
+4. If a service crash, will be restarted by the kubelet. Easier than setup restart policy for a bunch of different services
+
