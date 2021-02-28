@@ -1,0 +1,17 @@
+##Really similar to ReplicaSet
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-deamon-set
+spec:
+  selector:
+    matchLabels:
+      type: logging-service
+  template:
+    metadata:
+      labels:
+        type: logging-service
+    spec:
+      containers:
+        - name: monitoring-agent
+          image: monitoring-agent

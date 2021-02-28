@@ -120,6 +120,8 @@ The scheduler uses these limits to schedule the pods on a node with enough resou
 By default, Docker doesn't have any memory and resources limits  
 If not specified in yaml file, the pod has no resource limits either  
 
+!!!You can create a `LimitRange` object!!! to specify default limit values for your containers
+
 Of course, can be specifed in the yaml file  
 See [pod-resources.yaml](pod-resources-definition.yaml)  
 
@@ -128,3 +130,21 @@ See [pod-resources.yaml](pod-resources-definition.yaml)
 * `Memory` -> Pod is killed if exceed memory  
 
 Behaves like that because memory cannot be reclaimed 
+
+## 7 - Daemon Sets
+
+Daemon sets are like replica sets, in the sense it helps you to deploy your pods on multiple nodes  
+
+However, `Deamon Sets` ensure that one copy of each pod is running on each node
+* If a node is deleted, the copy is deleted
+* If a node is added, a new copy is automatically added on that node
+* Each node gets one copy of the pod specified in the daemon set  
+
+See [daemon-set yaml](deamonset-definition.yaml)
+
+####Use cases
+* `kube-proxy` -> Has to present on every node of the kubernetes cluster
+* `weave-net` -> Networking agent, needs a copy on every node
+
+####Under the hood
+Uses `NodeAffinity` to schedule a pod per node
