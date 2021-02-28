@@ -103,3 +103,28 @@ See `NodeAffinityTypes` for the possible behaviors
     * !!!However, other pods can still be scheduled on color pods, even if they don't have nodeSelector!!!
     
 Hence, we need **BOTH** `taints and tolerations` and `Node Affinity` to ensure only specific pods are scheduled on specific nodes
+
+## 6 - Resources and limits
+
+Each node has `CPU`, `MEM`, `DISK`  
+Pod can specify resources they want to acquire 
+The scheduler uses these limits to schedule the pods on a node with enough resources
+
+* `CPU`
+    * 1 CPU is equal to 1 AWS vCPU, 1 Hyperthread, 1 GPC Core...
+    * Can be expressed in milliCPU
+* `Memory`
+    * 1G -> 1 GigaByte (1000 M) = 1 000 000 000 bytes
+    * 1Gi -> 1024 Mi = 1 073 741 824 bytes
+    
+By default, Docker doesn't have any memory and resources limits  
+If not specified in yaml file, the pod has no resource limits either  
+
+Of course, can be specifed in the yaml file  
+See [pod-resources.yaml](pod-resources-definition.yaml)  
+
+####What happens if try to exceed resources?
+* `CPU` -> Container is throttled
+* `Memory` -> Pod is killed if exceed memory  
+
+Behaves like that because memory cannot be reclaimed 
