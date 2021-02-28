@@ -51,3 +51,19 @@ Can also be added in yaml files
 Special case of the master node  
 No pods are scheduled on master node by default  
 The master node has a special taint which prevents pods to be scheduled here
+
+## 4 - Nodes Selectors
+
+Assuming multiples nodes with different sizes
+
+Can be added as a section in a yaml file  
+The node selectors sections specify a label which has to match the labels on the nodes
+
+To label nodes: 
+* `kubectl label nodes node-name key=value`
+* `kubectl label nodes node1 size=large`  
+
+Nice, but only match single label  
+How do we do
+* Pod on medium or large node?
+* Pod not on small node?
