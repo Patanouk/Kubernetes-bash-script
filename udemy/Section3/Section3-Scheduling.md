@@ -194,3 +194,32 @@ Useful to setup kubernetes cluster
 3. The kubelet download and install the images. That way, no need to worry about setting up things manually, downloading etc...
 4. If a service crash, will be restarted by the kubelet. Easier than setup restart policy for a bunch of different services
 
+## 9 - Multiple Schedulers  
+
+If you want extra steps before scheduling, you can write your own scheduler  
+Kubernetes is extensible  
+
+Can have multiple schedulers, which can then be used when scheduling different pods  
+
+To start another scheduler
+* We can run another scheduler binary with a different `--scheduler-name` CLI option
+* We can also copy the yaml file used for the default scheduler under the `staticPodPath`
+
+####Important CLI options
+* `--leader-elect` : If set to true, will do a leader election for HA
+    * `--lock-object-name` : If multiple schedulers, used to differentiate the new scheduler from the old one for the election process
+
+####How to make pod use custom scheduler
+See [pod custom scheduler](pod-customscheduler-definition.yaml)  
+
+If the scheduler doesn't exist, the pod will stay in pending state
+
+####How to know which scheduler is scheduling which pods?
+
+`kubectl get events`
+* `Reason` : Scheduled
+* `Source` : The name of the scheduler
+* `Message` : More Details about the scheduling event
+
+####How to view scheduler logs?
+`kubectl logs custom-scheduler-pod -n kube-system`
