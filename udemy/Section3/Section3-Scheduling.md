@@ -85,3 +85,21 @@ See `NodeAffinityTypes` for the possible behaviors
     * `preferred` -> If no matching nodes, pod will still be scheduled on any available nodes
 * `DuringExecution` -> Considered after pods are running, when we make changes to the nodes
     * `Ignored` -> Changing the nodes labels doesn't evict currently running pods
+    
+
+## 6 - Node affinity vs Taints and tolerations
+
+3 nodes and 3 pods, each in 3 different colors. Also, other nodes in cluster with other colors  
+
+* `Taints and tolerations`
+    * Add taint with the color on each nodes
+    * Add toleration with the color on each pod
+    * We're sure each node can only accept pods with the associated taint
+    * !!!However, we're not sure each color pod is put on each color node!!!
+* `Node Affinity`
+    * Label each node with their respective color
+    * Add NodeSelector on each pod with the color
+    * That ensures that each pod is scheduled on a node with the specific color
+    * !!!However, other pods can still be scheduled on color pods, even if they don't have nodeSelector!!!
+    
+Hence, we need **BOTH** `taints and tolerations` and `Node Affinity` to ensure only specific pods are scheduled on specific nodes
