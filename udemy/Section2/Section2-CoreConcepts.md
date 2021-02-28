@@ -265,3 +265,14 @@ TODO : Check what endpoint is for a service
   * `kubectl scale deployment`
 * `Declarative` : Only specifying the final state we want to go to
   * `kubectl apply`
+  
+### More about kubectl apply
+
+`Kubectl apply` uses three configurations
+* The local one (one in kubectl apply -f command)
+* The last applied one
+* The live object configuration
+
+If the object does not exist, it is created
+If live config different from local config, the changes are applied to the live config
+If local config different from last config, changes are applied to the live config
