@@ -29,6 +29,8 @@ For example, when creating a ReplicaSet :
 Cannot be used for selecting
 Used for a lot of stuff, for example prometheus auto-discovery of scraping endpoints
 
+See [pod-label](pod-label-definition.yaml)
+
 ## 3 - Taints and Tolerations
 
 `Taint` are labels-like added to the node  
@@ -50,11 +52,14 @@ Can also be added in yaml files
 
 Special case of the master node  
 No pods are scheduled on master node by default  
-The master node has a special taint which prevents pods to be scheduled here
+The master node has a special taint which prevents pods to be scheduled here  
+
+See [pod-tolerations](pod-tolerations-definition.yaml)
 
 ## 4 - Nodes Selectors
 
-Assuming multiples nodes with different sizes
+Assuming multiples nodes with different sizes  
+See [pod-nodeselector](pod-nodeselector-definition.yaml)
 
 Can be added as a section in a yaml file  
 The node selectors sections specify a label which has to match the labels on the nodes
@@ -67,3 +72,16 @@ Nice, but only match single label
 How do we do
 * Pod on medium or large node?
 * Pod not on small node?
+
+## 5 - Node Affinity
+
+The goal is to ensure some pods are scheduled on some nodes
+
+See [pod-nodeaffinity.yaml](pod-nodeaffinity-definition.yaml). Lots of options  
+
+See `NodeAffinityTypes` for the possible behaviors  
+* `DuringScheduling` -> Considered when placing the pods on the node
+    * `required` -> Has to be placed on node matching the selectors. If no matching nodes, pod is not scheduled
+    * `preferred` -> If no matching nodes, pod will still be scheduled on any available nodes
+* `DuringExecution` -> Considered after pods are running, when we make changes to the nodes
+    * `Ignored` -> Changing the nodes labels doesn't evict currently running pods
