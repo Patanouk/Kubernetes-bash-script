@@ -1,5 +1,5 @@
 #Section 5
-##Rolling updates and rollback
+##1 - Rolling updates and rollback
 
 Kubernetes add versioning when deploying `deployments`  
 
@@ -22,3 +22,23 @@ Kubernetes add versioning when deploying `deployments`
 
 ###Rollback
 `kubectl rollout undo deployment/my-deployment` 
+
+##2 - Configure applications
+###2.1 - Commands
+
+Reminder:
+Containers are meant to run tasks   
+Once the task is done, we can exit  
+
+* `CMD` : command run when the container is ran
+* `ENTRYPOINT` : Content of `CMD` is passed to the `ENTRYPOINT`  
+
+####How to change the command in docker image?
+* `CLI` : add at the end of docker run
+* `DOCKERFILE` : Change the `CMD`
+
+####How to override the entrypoint?
+`docker run --entrypoint sleep2.0 ubuntu-sleeper 10`
+
+####Commands and arguments in kubernetes POD
+See [pod-command.yaml](pod-command.yaml)
