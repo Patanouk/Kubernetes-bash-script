@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+  labels:
+    app: my-pod
+spec:
+  containers:
+    - name: my-pod
+      image: alpine
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: my-env
+          value: "my-env-value"
+        - name: APP_COLOR
+          valueFrom:
+            configMapKeyRef:
+              name: my-config-map
+              key: APP_COLOR
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: my-secret
+              key: PASSWORD
+      volumeMounts:
+        - mountPath: /scripts
+          name: sql-script
+  volumes:
+    - name: sql-script
+      configMap:
+        name: my-file-configmap
+  restartPolicy: Always
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config-map
+data:
+  APP_COLOR: color
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-file-configmap
+data:
+  read-table.sql: |
+    select * from my-table;
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+data:
+  PASSWORD: password

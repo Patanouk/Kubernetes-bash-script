@@ -42,3 +42,8 @@ Once the task is done, we can exit
 
 ####Commands and arguments in kubernetes POD
 See [pod-command.yaml](pod-command.yaml)
+
+###2-2 Environment Variables
+They can be added as key-value pair, from secrets or configmaps  
+
+See [pod-environmentvariables](pod-environmentvariables.yaml)
