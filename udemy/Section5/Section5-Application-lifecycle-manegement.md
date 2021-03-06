@@ -51,6 +51,7 @@ See [pod-environmentvariables](pod-environmentvariables.yaml)
 ###2.3 Secrets
 Store data in hashed format
 See [pod-environmentvariables](pod-environmentvariables.yaml)
+See [pod-secret-env.yaml](pod-secret-env.yaml)
 
 You need to pass data in base64 encoded format
 
