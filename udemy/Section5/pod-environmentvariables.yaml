@@ -29,6 +29,9 @@ spec:
     - name: sql-script
       configMap:
         name: my-file-configmap
+    - name: sql-secrets
+      secret:
+        secretName: my-secret
   restartPolicy: Always
 
 ---

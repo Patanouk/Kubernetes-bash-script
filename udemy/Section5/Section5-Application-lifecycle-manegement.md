@@ -47,3 +47,19 @@ See [pod-command.yaml](pod-command.yaml)
 They can be added as key-value pair, from secrets or configmaps  
 
 See [pod-environmentvariables](pod-environmentvariables.yaml)
+
+###2.3 Secrets
+Store data in hashed format
+See [pod-environmentvariables](pod-environmentvariables.yaml)
+
+You need to pass data in base64 encoded format
+
+You can also create a volume from the secret  
+In which case, each secret creates a file with the key as name of the file  
+
+Of course, secrets are not inherently safe. Anyone can base64 decode them  
+Still more secure
+
+* A secret is only sent to a node if a pod on that node requires it.
+* Kubelet stores the secret into a tmpfs so that the secret is not written to disk storage.
+* Once the Pod that depends on the secret is deleted, kubelet will delete its local copy of the secret data as well.
