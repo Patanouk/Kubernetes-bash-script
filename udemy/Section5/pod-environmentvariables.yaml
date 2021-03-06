@@ -57,4 +57,4 @@ kind: Secret
 metadata:
   name: my-secret
 data:
-  PASSWORD: password
+  PASSWORD: cGFzc3dvcmQK
