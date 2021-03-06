@@ -64,3 +64,12 @@ Still more secure
 * A secret is only sent to a node if a pod on that node requires it.
 * Kubelet stores the secret into a tmpfs so that the secret is not written to disk storage.
 * Once the Pod that depends on the secret is deleted, kubelet will delete its local copy of the secret data as well.
+
+
+##3 Multi-container pods
+
+Just add more container in your deployment definition  
+This container share the same network. They can communicate with each other using localhost  
+They also share the same volumes?
+
+See [multi-container.yaml](deployment-multi-container.yaml)
