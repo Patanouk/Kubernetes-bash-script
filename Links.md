@@ -13,3 +13,9 @@ Just a bunch of random resources for Kubernetes
 * Quality of services for pods  
   https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/  
   https://stackoverflow.com/questions/65948141/kubernetes-memory-limit-containers-with-and-without-memory-limit-on-same-pod/65949334#65949334
+
+# Cluster Related resources
+
+## Networking
+
+* https://www.digitalocean.com/community/tutorials/understanding-ip-addresses-subnets-and-cidr-notation-for-networking
