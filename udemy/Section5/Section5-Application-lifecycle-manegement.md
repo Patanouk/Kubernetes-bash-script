@@ -73,3 +73,5 @@ This container share the same network. They can communicate with each other usin
 They also share the same volumes?
 
 See [multi-container.yaml](deployment-multi-container.yaml)
+
+###Init containers

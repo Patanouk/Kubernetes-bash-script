@@ -20,3 +20,7 @@ Just a bunch of random resources for Kubernetes
 
 * https://www.digitalocean.com/community/tutorials/understanding-ip-addresses-subnets-and-cidr-notation-for-networking
 * https://www.youtube.com/watch?v=z07HTSzzp3o
+
+##OOm pod
+* https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/
+  * Test with two containers inside same pod
