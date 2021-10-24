@@ -36,6 +36,30 @@ Upgrade steps:
     2. Upgrade them one by one
     3. Add new nodes with new version and shutdown old ones
     
+---
+Commands to upgrade
+Assuming all components are at 1.11.0
+
+1. Upgrade master nodes components
+* `apt-get upgrade -y kubeadm=1.12.0-00`
+* `kubeadm upgrade plan`
+* `kubeadm upgrade apply v1.12.0`
+* `k get nodes` <- version of the kubelet is not the version of the api-server
+* `ssh master-node`
+* `apt-get upgrade -y kubelet=1.12.0-00`
+* `systemctl restart kubelet`
+* `k get nodes` <- kubelet in the controlplane node is now at 1.12
+
+2. Upgrade worker nodes (Repeat for each nodes)
+
+* `kubectl drain node01`
+* `ssh node01`
+* `apt-get upgrade -y kubeadm=1.12.0-00`
+* `apt-get upgrade -y kubelet=1.12.0-00`
+* `kubeadm upgrade node config --kubelet-version 1.12.0-00`
+* `systemctl restart kubelet`
+* `kubectl uncordon node01`
+
 
 ##Backup and restore
 
